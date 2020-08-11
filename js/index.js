@@ -255,6 +255,8 @@ class Game {
         this.statusStop = false
         this.intervalId = setInterval(this.addBonus.bind(this), 5000)
         this.intervalId = setInterval(this.addMalus.bind(this), 6000)
+        this.playStartSound()
+        setTimeout(this.startGameSound.bind(this),3000)
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 
@@ -326,6 +328,7 @@ class Game {
             clearInterval(this.timer.intervalId)
             this.statusStop = true
             this.defineWinner()
+            this.playEndSound()
         }
     }
 
@@ -343,6 +346,7 @@ class Game {
         }
     }
 
+// Bonus & Malus
     addBonus() {
         for (let i = 0; i < 2; i++) {
             const randomX = 10 + (Math.random() * 1000)
@@ -367,6 +371,7 @@ class Game {
                 if (bonus.collision === false) {
                     this.player1.score += 1
                     bonus.collision = true
+                    this.playBonusSound()
                 }
         })
     }
@@ -377,6 +382,7 @@ class Game {
                 if (bonus.collision === false) {
                     this.player2.score += 1
                     bonus.collision = true
+                    this.playBonusSound()
                 }
         })
     }
@@ -387,6 +393,7 @@ class Game {
                 if (malus.collision === false) {
                     this.player1.score -= 1
                     malus.collision = true
+                    this.playMalusSound()
                 }
         })
     }
@@ -397,20 +404,62 @@ class Game {
                 if (malus.collision === false) {
                     this.player2.score -= 1
                     malus.collision = true
+                    this.playMalusSound()
                 }
         })
     }
 
+// Add audio to the game
+    startGameSound() {
+            const gameSound = new Audio('./audio/background-music.mp3')
+            gameSound.loop = false
+            gameSound.volume = 0.2
+            gameSound.play()
+    }
+    playStartSound() {
+        const startSound = new Audio('./audio/start-sound.mp3')
+        startSound.loop = false
+        startSound.volume = 0.2
+        startSound.play()
+    }
+    playPizzaSound() {
+        const  pizzaSound = new Audio('./audio/pizza-eating-sound.mp3')
+        pizzaSound.loop = false
+        pizzaSound.volume = 0.3
+        pizzaSound.play()
+    }
+    playBonusSound() {
+        const bonusSound = new Audio('./audio/bonus-sound.mp3')
+        bonusSound.loop = false
+        bonusSound.volume = 0.3
+        bonusSound.play()
+    }
+    playMalusSound() {
+        const malusSound = new Audio('./audio/malus-sound.mp3')
+        malusSound.loop = false
+        malusSound.volume = 0.2
+        malusSound.play()
+    }
+    playEndSound() {
+        const endSound = new Audio('./audio/game-over.mp3')
+        endSound.loop = false
+        endSound.volume = 0.3
+        endSound.play()
+    }
+
+// Event Listeners
     addListeners() {
         document.addEventListener('keyup', (e) => {
             switch (e.key) {
                 case 'w':
                     this.pizza1.eatPizza()
                     this.addScorePlayer1()
+                    this.playPizzaSound()
                     break;
                 case 'o':
                     this.pizza2.eatPizza()
                     this.addScorePlayer2()
+                    this.playPizzaSound()
                     break;
             }
         })
@@ -439,5 +488,4 @@ window.addEventListener('load', () => {
     game.startGame();
 });
 
-// button HTML
-//add music
+//add music first page
