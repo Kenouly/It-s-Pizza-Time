@@ -413,7 +413,7 @@ class Game {
     startGameSound() {
             const gameSound = new Audio('./audio/background-music.mp3')
             gameSound.loop = false
-            gameSound.volume = 0.2
+            gameSound.volume = 0.5
             gameSound.play()
     }
     playStartSound() {
@@ -488,4 +488,4 @@ window.addEventListener('load', () => {
     game.startGame();
 });
 
-//add music first page
+//add sound in first page --> check Jorg link
