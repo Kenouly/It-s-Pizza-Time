@@ -46,6 +46,7 @@ class Player1 {
         this.width = width
         this.height = height
     }
+
     drawPlayer1() {
         let x = this.x
         let y = this.y
@@ -54,12 +55,15 @@ class Player1 {
 
         ctx.drawImage(player1, x, y, width, height)
     }
+
     moveLeft() {
         this.x -= 30
     }
+
     moveRight() {
         this.x += 30
     }
+
 }
 
 class Player2 extends Player1 {
@@ -81,6 +85,7 @@ class Pizza {
         this.startAngle = startAngle
         this.endAngle = endAngle
     }
+
     drawPizza() {
         let x = this.x
         let y = this.y
@@ -91,16 +96,18 @@ class Pizza {
         const pattern = ctx.createPattern(pizza, 'repeat')
         ctx.beginPath()
         ctx.arc(x, y, radius, startAngle * Math.PI, (Math.PI / 180) * endAngle)
+        ctx.strokeStyle = 'orange'
+        ctx.lineWidth = 14
+        ctx.stroke()
         ctx.lineTo(x, y)
         ctx.fillStyle = pattern
         ctx.fill()
-        ctx.strokeStyle = 'orange'
-        ctx.lineWidth = 8
-        ctx.stroke()
     }
+
     eatPizza() {
         this.startAngle += 0.25
     }
+
 }
 
 class Bonus {
@@ -112,6 +119,7 @@ class Bonus {
         this.height = height
         this.collision = false
     }
+
     drawBonus() {
         let x = this.x
         let y = this.y
@@ -120,9 +128,11 @@ class Bonus {
 
         ctx.drawImage(bonus, x, y, width, height)
     }
+
     moveBonus() {
         this.y += this.speed
     }
+
 }
 
 class Malus {
@@ -134,6 +144,7 @@ class Malus {
         this.height = height
         this.collision = false
     }
+
     drawMalus() {
         let x = this.x
         let y = this.y
@@ -142,9 +153,11 @@ class Malus {
 
         ctx.drawImage(malus, x, y, width, height)
     }
+
     moveMalus() {
         this.y += this.speed
     }
+
 }
 
 
@@ -155,6 +168,7 @@ class Yummy {
         this.width = width
         this.height = height
     }
+
     drawYummy() {
         let x = this.x
         let y = this.y
@@ -163,18 +177,21 @@ class Yummy {
 
         ctx.drawImage(yum, x, y, width, height)
     }
+
     showYummy() {
         this.intervalId = setInterval(() => {
             this.width = 50
             this.height = 50
         }, 2000)
     }
+
     hideYummy() {
         this.intervalId = setInterval(() => {
             this.width = 0
             this.height = 0
         }, 1000)
     }
+
 }
 
 class Timer {
@@ -182,17 +199,20 @@ class Timer {
         this.currentTime = currentTime
         this.intervalId = 0
     }
+
     drawTimer() {
         let currentTime = this.currentTime
         ctx.fillStyle = 'black'
         ctx.font = '24px Verdana'
         ctx.fillText(`Remaining Time: ${currentTime}`, 50, 50)
     }
+
     startTimer() {
         this.intervalId = setInterval(() => {
             this.currentTime--
         }, 1000)
     }
+
 }
 
 class Start {
@@ -200,6 +220,7 @@ class Start {
         this.currentTime = currentTime
         this.intervalId = 0
     }
+
     drawStart() {
         let currentTime = this.currentTime
         if (this.currentTime > 0) {
@@ -213,11 +234,13 @@ class Start {
             ctx.fillText('START', 390, 200)
         }
     }
+
     preStart() {
         this.intervalId = setInterval(() => {
             this.currentTime--
         }, 1000)
     }
+
 }
 
 class Game {
@@ -256,7 +279,7 @@ class Game {
         this.intervalId = setInterval(this.addBonus.bind(this), 5000)
         this.intervalId = setInterval(this.addMalus.bind(this), 6000)
         this.playStartSound()
-        setTimeout(this.startGameSound.bind(this),3000)
+        setTimeout(this.startGameSound.bind(this), 3000)
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 
@@ -299,6 +322,7 @@ class Game {
         }
     }
 
+    // Score
     addScorePlayer1() {
         if (this.pizza1.startAngle % 2 == 0) {
             this.player1.score += 1
@@ -323,15 +347,6 @@ class Game {
         ctx.fillText(this.player2.score, 560, 310)
     }
 
-    stopGame() {
-        if (this.timer.currentTime <= 0) {
-            clearInterval(this.timer.intervalId)
-            this.statusStop = true
-            this.defineWinner()
-            this.playEndSound()
-        }
-    }
-
     defineWinner() {
         if (this.player1.score > this.player2.score) {
             ctx.drawImage(winner, 150, 350, 250, 250)
@@ -346,7 +361,7 @@ class Game {
         }
     }
 
-// Bonus & Malus
+    // Bonus & Malus
     addBonus() {
         for (let i = 0; i < 2; i++) {
             const randomX = 10 + (Math.random() * 1000)
@@ -409,12 +424,12 @@ class Game {
         })
     }
 
-// Add audio to the game
+    // Add audio to the game
     startGameSound() {
-            const gameSound = new Audio('./audio/background-music.mp3')
-            gameSound.loop = false
-            gameSound.volume = 0.5
-            gameSound.play()
+        const gameSound = new Audio('./audio/background-music.mp3')
+        gameSound.loop = false
+        gameSound.volume = 0.5
+        gameSound.play()
     }
     playStartSound() {
         const startSound = new Audio('./audio/start-sound.mp3')
@@ -423,7 +438,7 @@ class Game {
         startSound.play()
     }
     playPizzaSound() {
-        const  pizzaSound = new Audio('./audio/pizza-eating-sound.mp3')
+        const pizzaSound = new Audio('./audio/pizza-eating-sound.mp3')
         pizzaSound.loop = false
         pizzaSound.volume = 0.3
         pizzaSound.play()
@@ -447,7 +462,17 @@ class Game {
         endSound.play()
     }
 
-// Event Listeners
+    // Stop game
+    stopGame() {
+        if (this.timer.currentTime <= 0) {
+            clearInterval(this.timer.intervalId)
+            this.statusStop = true
+            this.defineWinner()
+            this.playEndSound()
+        }
+    }
+
+    // Event Listeners
     addListeners() {
         document.addEventListener('keyup', (e) => {
             switch (e.key) {
@@ -480,6 +505,7 @@ class Game {
             }
         })
     }
+
 }
 
 const game = new Game()
@@ -487,5 +513,3 @@ const game = new Game()
 window.addEventListener('load', () => {
     game.startGame();
 });
-
-//add sound in first page --> check Jorg link

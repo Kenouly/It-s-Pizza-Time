@@ -12,10 +12,15 @@ body {
 span {
     background-color: lightgray;
     padding: 3px 10px;
+    font-size: 0.8em;
 }
 
 #start-page {
     padding: 30px 0px;
+}
+
+#start-page img {
+    width: 700px;
 }
 
 button {
@@ -23,11 +28,25 @@ button {
 }
 
 #start-button {
-    margin: 20px 0px;
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: lightgray;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
 }
 
 #play-again-button {
-    margin: 0px 50px;
+    margin: 0px 20px 20px 20px;
+    font-size: 18px;
+    font-weight: bolder;
+    background-color: lightgray;
+    padding: 10px 30px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
 }
 
 #game-board {
