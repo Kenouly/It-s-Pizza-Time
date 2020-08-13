@@ -279,7 +279,7 @@ class Game {
         this.intervalId = setInterval(this.addBonus.bind(this), 5000)
         this.intervalId = setInterval(this.addMalus.bind(this), 6000)
         this.playStartSound()
-        setTimeout(this.startGameSound.bind(this), 3000)
+        setTimeout(this.startGameSound.bind(this), 4000)
         requestAnimationFrame(this.gameLoop.bind(this))
     }
 
@@ -357,7 +357,7 @@ class Game {
         } else {
             ctx.fillStyle = 'red'
             ctx.font = '42px Verdana'
-            ctx.fillText('YOU ARE ON A NINJA DIET', 200, 270)
+            ctx.fillText('YOU ARE ON A NINJA DIET !', 200, 250)
         }
     }
 

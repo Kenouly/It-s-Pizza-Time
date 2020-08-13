@@ -9,22 +9,23 @@ body {
     height: 100%;
 }
 
-span {
-    background-color: lightgray;
-    padding: 3px 10px;
-    font-size: 0.8em;
+/*Start Page*/
+#start-page {
+    padding: 10px 0px;
 }
 
-#start-page {
-    padding: 30px 0px;
+#start-page h1 {
+    letter-spacing: 4px;
+    font-size: 3em;
+    font-weight: bolder;
 }
 
 #start-page img {
-    width: 700px;
+    width: 650px;
 }
 
-button {
-    font-size: 1.1em;
+#start-page p {
+    font-size: 1.5em;
 }
 
 #start-button {
@@ -32,14 +33,37 @@ button {
     font-size: 20px;
     font-weight: bolder;
     background-color: lightgray;
-    padding: 20px 40px;
+    padding: 10px 40px;
     border: 0;
     box-shadow: 0;
     border-radius: 5px;
 }
 
+/*Game page*/
+#game-board {
+    float: center;
+    padding: 0px;
+}
+
+#intro {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+#intro h1 {
+    letter-spacing: 2.5px;
+    font-weight: bolder;
+}
+
+span {
+    background-color: lightgray;
+    padding: 3px 10px;
+    font-size: 0.8em;
+}
+
 #play-again-button {
-    margin: 0px 20px 20px 20px;
+    margin: 0px 40px 20px 40px;
     font-size: 18px;
     font-weight: bolder;
     background-color: lightgray;
@@ -47,19 +71,4 @@ button {
     border: 0;
     box-shadow: 0;
     border-radius: 5px;
-}
-
-#game-board {
-    float: center;
-    padding: 0px;
-}
-
-#intro{
-    display: flex;
-    justify-content: space-evenly;
-    text-align: left;
-}
-
-#intro img {
-    width: 30px;
 }
